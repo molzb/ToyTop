@@ -109,15 +109,15 @@ function draw() {
 		['red', 'green', 'blue']
 	];
 
+	ctx.lineWidth = 21;
+
 	for (var i = 0; i < 12; i++) {
-		for (var cIdx = 0, p = 0; p < 120; p += 20, cIdx++) {
+		for (var cIdx = 0, r = 10; r <= 110; r += 20, cIdx++) {
 			var cols = colors[cIdx];
-			for (var r = p; r < p + 20; r++) {
-				ctx.beginPath();
-				ctx.arc(125, 125, r, (i - 1) * Math.PI / 6.0, i * Math.PI / 6.0);
-				ctx.strokeStyle = cols[i % cols.length];
-				ctx.stroke();
-			}
+			ctx.beginPath();
+			ctx.arc(125, 125, r, (i - 1) * Math.PI / 6.0, i * Math.PI / 6.0);
+			ctx.strokeStyle = cols[i % cols.length];
+			ctx.stroke();
 		}
 	}
 }

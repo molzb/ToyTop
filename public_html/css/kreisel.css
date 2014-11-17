@@ -5,7 +5,7 @@
 @font-face { font-family: crayonFont; src: url(../images/PastelCrayon.ttf) format('truetype'); }
 html { height: 100%; }
 body { background-image: url(../images/karo.png); background-repeat: repeat;
-	   font-family: crayonFont; overflow: hidden; height: 100%; }
+	   font-family: crayonFont; overflow: hidden; height: 100%; user-select: none; -webkit-user-select: none; }
 #myCanvas { position: absolute; left: 50px; top: 100px; z-index: 2; }
 #finish { position: absolute; left: 500px; top: 500px; width: 250px; height: 250px; border-radius: 250px;
 		  background-color: red; font-size: 36px; }
