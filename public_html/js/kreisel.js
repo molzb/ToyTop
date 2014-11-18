@@ -57,7 +57,7 @@ function updateTime() {
 		}
 		if (cntTime < 0.1) {
 			window.clearInterval(pid);
-			$("#outoftime").show(500);
+			$(".splash.outoftime").show(500);
 			window.clearInterval(timeId);
 		}
 
@@ -152,9 +152,9 @@ function checkIfLost() {
 	if (left < -(width/2) || top < -(height/2)) {
 		if (pid > 0)
 			window.clearInterval(pid);
-		$("#lost").show();
+		$(".splash.lost").show();
 		window.setTimeout(function() {
-			$("#lost").hide();
+			$(".splash.lost").hide();
 			resetPosition();
 		}, 2000);
 	}
@@ -178,7 +178,7 @@ function readDistance() {
 		changeBgFinish(distXY);
 		if (distXY < 50) {
 			if (cntRemainFinishs-- <= 0) {
-				$("#done").show();
+				$(".splash.done").show();
 				window.clearInterval(timeId);
 				score += parseInt(cntTime * 100);
 				$("#score").text(score);
