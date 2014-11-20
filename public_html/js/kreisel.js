@@ -20,8 +20,6 @@ var hiscores = [{name: "bm1", score: 5000},{name: "bm2", score: 4000},{name: "bm
 var CNT_HISCORES = 5; 
 
 $(document).ready(function() {
-	blinkArrows();
-
 	$("canvas").mousedown(function(e) {
 		dragX = e.pageX;
 		dragY = e.pageY;
@@ -42,7 +40,21 @@ $(document).ready(function() {
 
 		rotate(deltaX, deltaY);
 	});
+
+	$(".playagain .yes").click(function() {
+		play();
+	});
+	$(".playagain .no").click(function() {
+		window.location.href = "https://www.google.com";
+	});
 });
+
+function play() {
+	cntFinishs = 5, cntRemainFinishs = 5, cntStrokes = 0, cntTime = 90.0, score = 0;
+	blinkArrows();
+	hideSplash();
+	$("#myCanvas").css("left", "50px").css("top", "100px"); 
+}
 
 function updateTime() {
 	var timeInterval = 100;
@@ -57,8 +69,9 @@ function updateTime() {
 		}
 		if (cntTime < 0.1) {
 			window.clearInterval(pid);
-			$(".splash.outoftime").show(500);
+			showSplash("Out of time!");
 			window.clearInterval(timeId);
+			$(".splash.playagain").show();
 		}
 
 		time.text(strTime + " s");
@@ -152,12 +165,29 @@ function checkIfLost() {
 	if (left < -(width/2) || top < -(height/2)) {
 		if (pid > 0)
 			window.clearInterval(pid);
-		$(".splash.lost").show();
+		showSplash("You're lost!<br>You lose 2s.");
 		window.setTimeout(function() {
-			$(".splash.lost").hide();
+			hideSplash();
 			resetPosition();
 		}, 2000);
 	}
+}
+
+function showSplash(h1Text, callback) {
+	$(".splash.dummy h1").html(h1Text);
+	$(".splash.dummy").show();
+
+	if (callback === undefined) {
+		$(".splash.dummy .click").click(function() {
+			hideSplash();
+		});
+	} else {
+		$(".splash.dummy .click").click(callback);
+	}
+}
+
+function hideSplash() {
+	$(".splash.dummy").hide();
 }
 
 function resetPosition() {
@@ -178,17 +208,27 @@ function readDistance() {
 		changeBgFinish(distXY);
 		if (distXY < 50) {
 			if (cntRemainFinishs-- <= 0) {
-				$(".splash.done").show();
 				window.clearInterval(timeId);
+				window.clearInterval(pid);
 				score += parseInt(cntTime * 100);
 				$("#score").text(score);
 				if (score > hiscore) {
 					hiscore = score;
 					$("#hiscore").text(hiscore);
 				}
+				
+				showSplash("You made it", function() {
+					console.log("callback in you made it");
+					console.log($(this));
+					$(this).click(function() {
+						hideSplash();
+						$(".splash.playagain").show();
+					});
+				});
 			} else {
 				moveFinish();
 				score += 1000;
+				$("#remGoals").text(cntRemainFinishs);
 				$("#score").text(score);
 			}
 		}

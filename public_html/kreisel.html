@@ -61,27 +61,22 @@
 			</span>
 		</div>
 
-		<div class="splash done" onclick="$(this).hide(500)">
-			<h1>You made it!</h1>
+		<div class="splash dummy">
+			<h1>JS generated message</h1>
 			<span class="info">
 				<span class="click">Click to continue</span>
 			</span>
 		</div>
 
-		<div class="splash lost" onclick="$(this).hide(500)">
-			<h1>You're lost!<br>You lose 2s.</h1>
+		<div class="splash playagain">
+			<h1>Play again?</h1>
 			<span class="info">
-				<span class="click">Click to continue</span>
+				<span class="click yes">Yes</span>
+				<span class="spacer50">&nbsp;</span>
+				<span class="click no">No</span>
 			</span>
 		</div>
 
-		<div class="splash outoftime" onclick="$(this).hide(500)">
-			<h1>Out of time!</h1>
-			<span class="info">
-				<span class="click">Click to continue</span>
-			</span>
-		</div>
-		
 		<div id="copyright">
 			&copy;Bernhard Molz
 		</div>
@@ -93,6 +88,9 @@
 		<div id="scores">
 			<span>Score:</span><span id="score">0</span>
 			<span>Hiscore:</span><span id="hiscore">0</span>
+		</div>
+		<div id="remainingGoals">
+			<span>Goals:</span><span id="remGoals">5</span>
 		</div>
 	</body>
 </html>
