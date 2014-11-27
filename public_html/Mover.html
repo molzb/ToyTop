@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Experiment</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				drawSquares();
+			});
+
+			function drawSquares() {
+				var width = $("body").width(), height = $("body").height();
+				var x0 = width / 2, y0 = 0;
+				var boxsize = 16;
+
+				var divs = "";
+				while (y0 < height) {
+					var bgColor = 0;
+					x0 = width / 2;
+					while (x0 < width) {
+						var pos = "left: " + x0 + "px; top: " + y0 + "px; ";
+						var bg  = "background-color: rgb(" + bgColor + ", 0,0); ";
+						var dim = "width: " + boxsize + "px; height: " + boxsize + "px; ";
+						divs += "<div class='box' style='" + pos + bg + dim + "'></div>\n";
+						if (bgColor < 255) 
+							bgColor += 3;
+						x0 += boxsize;
+					}
+					y0 += boxsize;
+				}
+				var x0 = width / 2, y0 = 0;
+				while (y0 < height) {
+					var bgColor = 0;
+					x0 = width / 2;
+					while (x0 > 0) {
+						var pos = "left: " + x0 + "px; top: " + y0 + "px; ";
+						var bg  = "background-color: rgb(0," + bgColor + ",0); ";
+						var dim = "width: " + boxsize + "px; height: " + boxsize + "px; ";
+						divs += "<div class='box' style='" + pos + bg + dim + "'></div>\n";
+						if (bgColor < 255) 
+							bgColor += 3;
+						x0 -= boxsize;
+					}
+					y0 += boxsize;
+				}
+
+				$("#wrapper").append(divs);
+			}
+		</script>
+		<style type="text/css">
+			html, body, #wrapper { height: 100%; }
+			#wrapper .box { position: absolute; }
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+
+		</div>
+	</body>
+</html>
