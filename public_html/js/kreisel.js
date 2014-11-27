@@ -3,6 +3,7 @@
     Author     : Bernhard Molz
 */
 "use strict";
+var TILESIZE_X = 64, TILESIZE_Y = 64;
 var dragX = 0, dragY = 0, nowT = 0;
 var dragDeltaX = 0, dragDeltaY = 0, deltaT = 0;
 var deltaX = 0, deltaY = 0;
@@ -17,7 +18,18 @@ var hiscore = 0;
 
 var hiscores = [{name: "bm1", score: 5000},{name: "bm2", score: 4000},{name: "bm3", score: 3000},
 	{name: "bm4", score: 2000},{name: "bm5", score: 1000}];
-var CNT_HISCORES = 5; 
+var CNT_HISCORES = 5;
+
+var playfield = [
+	"ggggggggggggggg",
+	"ggg.........ggg",
+	"ggg.........ggg",
+	"gggXgg...gggggg",
+	"gggXgg...gggggg",
+	"gggXgg...gggggg",
+	"gggXgg...gggggg",
+	"gggggg...gggggg",
+	"gogXgggggggggg " ];
 
 $(document).ready(function() {
 	$("canvas").mousedown(function(e) {
@@ -42,12 +54,37 @@ $(document).ready(function() {
 	});
 
 	$(".playagain .yes").click(function() {
+		$(".playagain").hide();
 		play();
 	});
 	$(".playagain .no").click(function() {
+		$(".playagain").hide();
 		window.location.href = "https://www.google.com";
 	});
 });
+
+function showPlayfield() {
+	var left = 0, top = 0;
+	for (var row = 0; row < playfield.length; row++) {
+		var p_row = playfield[row];
+		left = 0;
+		for (var col = 0; col < p_row.length; col++) {
+			var letter = p_row[col];
+			var tile = "";
+			switch (letter) {
+				case "g": tile = "images/green.png"; break;
+				case ".": tile = "images/blue.png"; break;
+				case "X": tile = "images/hole.png"; break;
+				case "o": tile = "images/red.png"; break;
+				case " ": tile = "images/yellow.png"; break;
+			}
+			var style = "style='position: absolute; left: " + left + "px; top:" + top + "px'";
+			$("body").append("<img src='" + tile + "' alt='' " + style + "/>");
+			left += TILESIZE_X;
+		}
+		top += TILESIZE_Y;
+	}
+}
 
 function play() {
 	cntFinishs = 5, cntRemainFinishs = 5, cntStrokes = 0, cntTime = 90.0, score = 0;
@@ -276,7 +313,22 @@ function enterHiscore(myScore) {
 		}
 		hiscores.splice(pos, 0, {name: "___", score: myScore});
 		hiscores.splice(CNT_HISCORES,1);	// remove last element
+
+		showHiscores();
+
+		var inputTxt = "<input id='txtHiscoreName' type='text' onkeyup='finishHiscore(event, " + pos + ")' value=''/>";
 		tbl.find("tr:eq(" + (pos+1) + ") td.score").text(myScore);
-		tbl.find("tr:eq(" + (pos+1) + ") td.name").text("___");
+		tbl.find("tr:eq(" + (pos+1) + ") td.name").html(inputTxt);
+	}
+}
+
+function finishHiscore(e, pos) {
+	if (e.keyCode === 13) {
+//		var trName = $("#txtHiscoreName").parent();
+		var myName = $("#txtHiscoreName").val();
+		$("#txtHiscoreName").remove();
+		hiscores[pos] = { name : myName, score: $(".hiscores table td.score:eq(" + pos + ")").text() };
+//		trName.text(myName);
+		showHiscores();
 	}
 }

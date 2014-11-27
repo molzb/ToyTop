@@ -41,6 +41,7 @@ splash.playagain .yes, splash.playagain .no { /* marker classes for JS */ }
 .splash.hiscores #tblHiscores td.score, .splash.hiscores #tblHiscores td.name {
 	text-align: right;
 }
+.splash.hiscores td #txtHiscoreName { font-family: crayonFont; font-size: 24px; color: limegreen; width: 80px; }
 
 .splash > h1 { text-align: center; }
 .splash .info { text-align: center; display: table; width: 100%; padding-top: 20px; }
