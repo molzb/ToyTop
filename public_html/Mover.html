@@ -1,18 +1,54 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Experiment</title>
+		<title>DOM Benchmark</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/mover.js"></script>
 		<style type="text/css">
-			html, body, #wrapper { height: 100%; }
+			html, body, #wrapper { height: 100%; font-family: sans-serif; overflow: hidden; }
+			h2, h3 { text-align: center; }
 			#wrapper .box { position: absolute; width: 16px; height: 16px;
 							color: white; font-family: arial; font-size: 8px; }
+			#textWrapper {
+				position: relative; width: 800px; height: 100%;
+				margin: 0 auto; color: white;
+				text-align: center;
+			}
+			.textCentered {
+				position: absolute;
+				width: 600px;
+				left: 50%;
+				margin-left: -200px;
+				z-index: 1;
+			}
+			.l1				{ top: 50px;  font-size: 48px; }
+			.h2DivsDrawn	{ top: 150px; font-size: 36px; }
+			.h2DivsPerSec	{ top: 200px; font-size: 36px; }
+			.plWait { top: 250px; font-size: 28px; display: none; }
+			.info	{ top: 350px; font-size: 16px; }
+			.btnStart		{ top: 500px; font-size: 24px; }
+			.btnMouseMove	{ top: 500px; font-size: 24px; display: none; }
 		</style>
 	</head>
 	<body>
+		<div id="textWrapper">
+			<h1 class="textCentered l1">Massive DOM Benchmark</h1>
+			<h2 class="textCentered h2DivsDrawn">DIVs on screen: <span id="divsOnScreen">&nbsp;</span></h2>
+			<h2 class="textCentered h2DivsPerSec">DIVs per second: <span id="divsPerSec">...</span></h2>
+			<h3 class="textCentered plWait">Please wait ...</h3>
+			<span class="textCentered info">
+				This benchmark measures drawing and updating a huge amout of<br/>
+				DIV elements. Check your score in different browsers on<br/>
+				different platforms on different devices.<br/><br/>
+				After benchmarking your browser, this test will measure the distance<br/>
+				of a DIV (square) to your mouse position, just to give you some<br/>
+				feedback how your browser 'feels'.<br/>
+			</span>
+			<button class="btnStart textCentered">Start benchmark</button>
+			<button class="btnMouseMove textCentered">Move your mouse</button>
+		</div>
 		<div id="wrapper">&nbsp;</div>
 	</body>
 </html>
