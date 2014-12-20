@@ -125,7 +125,7 @@ function drawSquares(bgColorAdd) {
 	var width = $("body").width(), height = $("body").height();
 	var divCnt = 0;
 	divWidth = parseInt(width / BOXSIZE), divHeight = parseInt(height / BOXSIZE);
-	var divs = "";
+	var divs = [];
 
 	for (var y0 = 0; y0 < height; y0+=BOXSIZE) {
 		var bgColor = 255;
@@ -137,11 +137,11 @@ function drawSquares(bgColorAdd) {
 			var bg = (x0 < width / 2) ?
 				"background-color: rgb(" + parseInt(bgColor) + ", 0,0); " :
 				"background-color: rgb(0," + parseInt(bgColor) + ", 0); ";
-			divs += "<div class='box' style='" + pos + bg + "'></div>\n";
+			divs.push("<div class='box' style='" + pos + bg + "'></div>\n");
 			divCnt++;
 		}
 	}
 
-	$("#wrapper").append(divs);
+	$("#wrapper")[0].innerHTML = divs;
 	return divCnt;
 }
