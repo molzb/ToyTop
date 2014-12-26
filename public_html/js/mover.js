@@ -38,7 +38,9 @@ function drawImgWatermark(imgDataOrigin, imgWidth, imgHeight) {
 			var divIdx = (y + yOffset) * divWidth + x + xOffset;
 			var div = divs[divIdx];
 			var rgbDiv = readColor(div.style.backgroundColor);
-			var r1 = parseInt(rgbDiv[0] * 1.5), g1 = parseInt(rgbDiv[1] * 1.5), b1 = parseInt(rgbDiv[2] * 1.5);
+			var r1 = parseInt(x <  imgWidth / 2 ? rgbDiv[0] ^ 255 : rgbDiv[0] * 1.5),
+				g1 = parseInt(x >= imgWidth / 2 ? rgbDiv[1] ^ 255 : rgbDiv[1] * 1.5),
+				b1 = parseInt(rgbDiv[2] * 1.5);
 			divs[divIdx].style.backgroundColor = "rgb(" + r1 + "," + g1 + "," + b1 + ")";
 		}
 	}
@@ -110,7 +112,7 @@ function showBtnMouseMove() {
 function mouseClickToFinish() {
 	$("body").click(function() {
 		$("body").fadeOut(2000, function() {
-			document.location.href = "https://wwww.google.com";
+			document.location.href = "https://www.google.com";
 		});
 	});
 }
