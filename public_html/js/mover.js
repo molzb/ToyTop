@@ -34,16 +34,11 @@ function drawImgWatermark(imgDataOrigin, imgWidth, imgHeight) {
 	for (var y = 0, imgIdx = 0; y < imgHeight; y++) {
 		for (var x = 0; x < imgWidth; x++, imgIdx += 4) {
 			var r = imgDataOrigin.data[imgIdx];
-			var g = imgDataOrigin.data[imgIdx + 1];
-			var b = imgDataOrigin.data[imgIdx + 2];
-
 			if (r < 60) continue;
 			var divIdx = (y + yOffset) * divWidth + x + xOffset;
 			var div = divs[divIdx];
 			var rgbDiv = readColor(div.style.backgroundColor);
-			console.log(x + "/" + y + "=" + rgbDiv);
 			var r1 = parseInt(rgbDiv[0] * 1.5), g1 = parseInt(rgbDiv[1] * 1.5), b1 = parseInt(rgbDiv[2] * 1.5);
-//			divs[divIdx].style.backgroundColor = "rgb(" + r + "," + g + "," + b + ")";
 			divs[divIdx].style.backgroundColor = "rgb(" + r1 + "," + g1 + "," + b1 + ")";
 		}
 	}
