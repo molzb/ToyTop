@@ -26,7 +26,7 @@ function getImgData(img) {
 }
 
 function drawImgWatermark(imgDataOrigin, imgWidth, imgHeight) {
-	console.log("Img=" + imgWidth + "x" + imgHeight);
+	console.log("Img=" + imgWidth + "x" + imgHeight + ", divWxH=" + divWidth + "x" + divHeight);
 	var divs = $("#wrapper div");
 
 	var xOffset = divWidth > imgWidth ? parseInt((divWidth - imgWidth) / 2) : 0;
@@ -134,11 +134,11 @@ function drawSquares(bgColorAdd) {
 			var bg = (x0 < width / 2) ?
 				"background-color: rgb(" + parseInt(bgColor) + ", 0,0); " :
 				"background-color: rgb(0," + parseInt(bgColor) + ", 0); ";
-			divs.push("<div class='box' style='" + pos + bg + "'></div>\n");
+			divs.push("<div class='box' style='" + pos + bg + "'></div>");
 			divCnt++;
 		}
 	}
 
-	$("#wrapper")[0].innerHTML = divs;
+	$("#wrapper")[0].innerHTML = divs.join("");
 	return divCnt;
 }
