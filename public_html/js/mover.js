@@ -97,7 +97,7 @@ function doBenchmark(cnt) {
 			$(".plWait").remove();
 			$("#divsPerSec").text(parseInt(divsPerSecAvg));
 		}
-	}, 500);
+	}, cnt * 500);
 }
 
 function showBtnMouseMove() {
